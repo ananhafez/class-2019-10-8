@@ -1,0 +1,35 @@
+---
+title: "class-2019-10-8"
+author: "Anan Hafez"
+date: "10/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(purrr)
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+diceroll <- function(){sample(x = 1:6, size = 1)}
+
+craps_diceroll <- function() {     
+  sample(x = 1:6, size = 2, replace = TRUE) }
+```
+
+
+```{r}
+dicerolln <- function(n = 1){
+
+map_int(1:n, ~ diceroll() + diceroll()) 
+}
+```
+
+```{r}
+n_rolls <- tibble(rolls = dicerolln(n = 100000))
+
+ggplot(n_rolls, aes(x = rolls)) + geom_histogram(bins = 30) + scale_x_continuous(breaks = c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
+```
+
